@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import service.UserService;
 
 @Controller
 @RequestMapping("/user")
@@ -22,8 +23,7 @@ public class UserController {
         return "greeting";
     }
 
-
-
+    /*
     @GetMapping("/login")
     public String login(@ModelAttribute User user, Model model) {
         if (userService.isValid(user)) {
@@ -31,6 +31,6 @@ public class UserController {
         }
         model.addAttribute("loginFailed", true);
     }
-
+    */
 
 }
