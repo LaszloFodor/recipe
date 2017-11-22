@@ -1,6 +1,7 @@
 package service;
 
 
+import exception.UserNotValidException;
 import lombok.Data;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UserService {
 
     private User user;
 
-    public user login(User user) throws UserNotValidException {
+    public User login(User user) throws UserNotValidException {
         if(isValid(user)) {
             return this.user = userRepository.findByUsername(user.getUsername()).get();
         }
