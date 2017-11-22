@@ -22,8 +22,9 @@ public class RecipeService {
     private Recipe recipe;
 
     public Recipe getRecipeById(int id) throws RecipeIdNotValidException {
-        if (isValidId(id))
+        if(recipeRepository.findRecipeById(id) != null){
             return this.recipe = recipeRepository.findRecipeById(id);
+        }
         throw new RecipeIdNotValidException();
     }
 
@@ -32,9 +33,7 @@ public class RecipeService {
     }
 
     public Recipe addRecipe(Recipe recipe){
-        return 
+        return recipeRepository.add(recipe);
     }
 
-    private boolean isValidId(int id) {
-    }
 }
