@@ -1,17 +1,16 @@
 package repository;
 
 import model.Recipe;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface RecipeRepository {
-    public Recipe findRecipeById(int id) {
-    }
+public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
 
-    public List<Recipe> getAllRecipes() {
-        return allRecipes;
-    }
+    Optional<Recipe> findRecipeById(int id);
 
-    public Recipe add(Recipe recipe) {
-    }
+    Optional<List<Recipe>> getAllRecipes();
+
+    Optional<Recipe> add(Recipe recipe);
 }
