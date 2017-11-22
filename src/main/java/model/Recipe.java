@@ -14,6 +14,8 @@ import java.awt.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+@Getter
+@Setter
 public class Recipe extends BaseEntity{
 
     @Column(nullable = false, unique = true)

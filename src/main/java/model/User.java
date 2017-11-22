@@ -11,6 +11,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+@Getter
+@Setter
 public class User extends BaseEntity {
 
     @Column(nullable = false, unique = true)
