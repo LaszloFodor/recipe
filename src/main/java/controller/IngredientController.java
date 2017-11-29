@@ -1,5 +1,8 @@
 package controller;
 
-public class IngredientController
-{
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class IngredientController {
 }

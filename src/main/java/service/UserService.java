@@ -10,8 +10,6 @@ import org.springframework.web.context.annotation.SessionScope;
 import repository.UserRepository;
 
 @Service
-@SessionScope
-@Data
 public class UserService {
 
     @Autowired
@@ -21,7 +19,7 @@ public class UserService {
 
     public User login(User user) throws UserNotValidException {
         if(isValid(user)) {
-            return this.user = userRepository.findByUsername(user.getUsername()).get();
+            return this.user = userRepository.findByUsername(user.getUserName());
         }
         throw new UserNotValidException();
     }
@@ -33,7 +31,7 @@ public class UserService {
     }
 
     public boolean isValid(User user) {
-        return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword()).isPresent();
+        return (userRepository.findByUsernameAndPassword(user.getUserName(), user.getPassword()) instanceof User);
     }
 
     public boolean isLoggedIn() {

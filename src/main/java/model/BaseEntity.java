@@ -8,8 +8,6 @@ import javax.persistence.*;
 
 @Data
 @MappedSuperclass
-@Getter
-@Setter
 public class BaseEntity {
 
     @Id

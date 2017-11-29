@@ -2,28 +2,26 @@ package model;
 
 import lombok.*;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
-import java.awt.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "RECIPES")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
-@Getter
-@Setter
 public class Recipe extends BaseEntity{
 
-    @Column(nullable = false, unique = true)
     private String recipeName;
 
-    @Column(nullable = true)
-    private Image image;
+    private double time;
 
-    @Column(nullable = false, length = 200)
     private String description;
+
+    private int servings;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredientList;
+
 }

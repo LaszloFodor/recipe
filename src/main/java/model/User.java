@@ -8,32 +8,67 @@ import javax.persistence.*;
 @Entity
 @Table(name = "USERS")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
-@Getter
-@Setter
 public class User extends BaseEntity {
 
-    @Column(nullable = false, unique = true)
-    private String username;
+    private String userName;
 
-    @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(length = 40, nullable = false)
     private String firstName;
 
-    @Column(length = 40, nullable = false)
     private String lastName;
 
-    private String token;
+    public Role getRole() {
+        return role;
+    }
 
-    @Column(nullable = false, unique = true)
-    @Enumerated(EnumType.STRING)
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    @Enumerated(value = EnumType.STRING)
     private Role role;
 
     public enum Role {

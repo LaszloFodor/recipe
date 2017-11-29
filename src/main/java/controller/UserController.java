@@ -8,20 +8,19 @@ import org.springframework.web.bind.annotation.*;
 import service.UserService;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/greet")
+    @GetMapping("/user/greet")
     public String greeting(@RequestParam(value = "name", required = false, defaultValue = "User") String name, Model model){
         model.addAttribute("name", name);
         return "greeting";
     }
 
 
-    @GetMapping("/login")
+    @GetMapping("/user/login")
     public String login(@ModelAttribute User user, Model model) {
         if (userService.isValid(user)) {
             return redirectToGreeting(user);
@@ -30,13 +29,13 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping("/register")
+    @GetMapping("/user/register")
     public String register(Model model) {
         model.addAttribute("user", new User());
         return "register";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/user/register")
     public String register(@ModelAttribute User user) {
         userService.register(user);
         return redirectToGreeting(user);

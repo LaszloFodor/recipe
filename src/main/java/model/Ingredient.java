@@ -3,30 +3,25 @@ package model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "INGREDIENTS")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode
-@Getter
-@Setter
 public class Ingredient extends BaseEntity {
 
-    @Column(nullable = false, length = 20)
     private String name;
 
-    @Column(nullable = false)
-    private double measurement;
+    private double amount;
 
-    @Column(nullable = false)
+    @ManyToOne
+    private Recipe recipe;
+
+    @Enumerated(value = EnumType.ORDINAL)
     private Unit unit;
 
     public enum Unit {
-        GRAMM, DKG, KG, DECILITER, MILILITER, LITER
+        g, dkg, kg, l, dl, cl, ml, db
     }
+
 }
