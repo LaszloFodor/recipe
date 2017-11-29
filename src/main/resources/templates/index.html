@@ -12,10 +12,8 @@
         <th>ID</th>
         <th>Description</th>
     </tr>
-    <tr th:each="recip : ${recipe}">
-        <td th:text="${recip.id}">123</td>
-        <td th:text="${recip.name}">Tasty Goodnees</td>
-    </tr>
+        <td th:text="${recipe.id}">123</td>
+        <td th:text="${recipe.name}">Tasty Goodnees</td>
 </table>
 </body>
 </html>

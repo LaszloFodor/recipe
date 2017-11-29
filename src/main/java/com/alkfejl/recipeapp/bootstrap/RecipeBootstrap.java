@@ -14,12 +14,9 @@ import java.util.*;
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final IngredientRepository ingredientRepository;
-
     private final RecipeRepository recipeRepository;
 
-    public RecipeBootstrap(IngredientRepository ingredientRepository, RecipeRepository recipeRepository) {
-        this.ingredientRepository = ingredientRepository;
+    public RecipeBootstrap(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
 
