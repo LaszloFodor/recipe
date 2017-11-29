@@ -7,16 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Setter
-@Getter
-@Data
-@Entity
-public class Unit {
+public enum Unit {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    private String unit;
+    g, dkg, kg, l, ml, dl, cl, db, teaspoon, spoon
 
 }

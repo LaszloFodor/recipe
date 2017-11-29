@@ -22,8 +22,13 @@ public class Ingredient {
     @ManyToOne
     private Recipe recipe;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @Enumerated(value = EnumType.STRING)
     private Unit unit;
 
 
+    public Ingredient(String name, double d, Unit unit) {
+        this.name = name;
+        this.amount = d;
+        this.unit = unit;
+    }
 }

@@ -1,26 +1,25 @@
 package com.alkfejl.recipeapp.controller;
 
 
-import com.alkfejl.recipeapp.repository.UnitRepository;
+import com.alkfejl.recipeapp.service.RecipeService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Optional;
 
 @Controller
 public class IndexController {
 
-    private UnitRepository unitRepository;
+    private final RecipeService recipeService;
 
-    public IndexController(UnitRepository unitRepository) {
-        this.unitRepository = unitRepository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
+
     @RequestMapping({"/", "/index"})
-    public String getIndexPage() {
+    public String getIndexPage(Model model) {
 
-        System.out.println("---------unit: ");
-
+        model.addAttribute("recipe", recipeService.getRecipes());
         return "index";
     }
 
