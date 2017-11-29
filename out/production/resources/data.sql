@@ -1,2 +1,7 @@
-/*INSERT INTO USERS VALUES {'laci', 'laci', 'laci@laci.com', 'Laszlo', 'Fodor', 'ADMIN'};
-INSERT INTO USERS VALUES {'atis', 'atis', 'atis@atis.com', 'Attila', 'Kilyen', 'ADMIN'};*/
+INSERT INTO Unit (unit) VALUES ('g');
+INSERT INTO Unit (unit) VALUES ('dkg');
+INSERT INTO Unit (unit) VALUES ('kg');
+INSERT INTO Unit (unit) VALUES ('l');
+INSERT INTO Unit (unit) VALUES ('dl');
+INSERT INTO Unit (unit) VALUES ('cl');
+INSERT INTO Unit (unit) VALUES ('ml');

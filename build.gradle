@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.8.RELEASE'
+		springBootVersion = '1.5.9.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -14,7 +14,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
-group = 'com.app'
+group = 'com.alkfejl'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
@@ -25,12 +25,11 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-aop')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.hibernate:hibernate-core:5.2.12.Final')
-	compile("org.springframework.boot:spring-boot-starter-data-jpa")
-	compile("com.h2database:h2")
-	testCompile("junit:junit")
 	runtime('org.springframework.boot:spring-boot-devtools')
+	runtime('com.h2database:h2')
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
