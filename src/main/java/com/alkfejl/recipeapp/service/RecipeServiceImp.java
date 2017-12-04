@@ -25,7 +25,7 @@ public class RecipeServiceImp implements RecipeService {
     }
 
     @Override
-    public Recipe getRecipe() {
-        return recipeRepository.findOne(0);
+    public Recipe getRecipe(int id) {
+        return recipeRepository.findOne(id);
     }
 }

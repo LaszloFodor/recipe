@@ -2,7 +2,6 @@ package com.alkfejl.recipeapp.model;
 
 
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Set;
