@@ -1,4 +1,4 @@
 package com.alkfejl.recipeapp.exception;
 
-public class UserNotValidException {
+public class UserNotValidException extends Exception{
 }

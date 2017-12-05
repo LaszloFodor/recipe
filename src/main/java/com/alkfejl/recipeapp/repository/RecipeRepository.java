@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
 
-    Optional<Recipe> saveAll(List<Recipe> recipes);
+    //Optional<Recipe> saveAll(List<Recipe> recipes);
     Optional<Recipe> findByName(String name);
 }

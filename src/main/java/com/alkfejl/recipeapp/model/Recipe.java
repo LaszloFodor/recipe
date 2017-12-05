@@ -25,6 +25,8 @@ public class Recipe {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredientSet;
 
+    @ManyToOne
+    private User user;
 
 
 }
