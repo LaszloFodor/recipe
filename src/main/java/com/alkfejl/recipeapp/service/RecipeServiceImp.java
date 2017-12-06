@@ -31,12 +31,6 @@ public class RecipeServiceImp implements RecipeService {
     }
 
     @Override
-    public Recipe getRecipe(int id) {
-        this.recipe = recipeRepository.findOne(id);
-        return recipe;
-    }
-
-    @Override
     public void delete(int id) {
         recipeRepository.delete(id);
     }
