@@ -1,11 +1,14 @@
 package com.alkfejl.recipeapp.api;
 
 import com.alkfejl.recipeapp.exception.UserNotValidException;
+import com.alkfejl.recipeapp.model.Recipe;
 import com.alkfejl.recipeapp.model.User;
 import com.alkfejl.recipeapp.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 
 @RestController
@@ -46,6 +49,11 @@ public class UserApiController {
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
         return ResponseEntity.ok(userServiceImp.register(user));
+    }
+
+    @GetMapping("/recipes")
+    public ResponseEntity<Set<Recipe>> getRecipes(@RequestBody User user) {
+        return ResponseEntity.ok(userServiceImp.getRecipes(user));
     }
 
 

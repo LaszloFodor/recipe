@@ -11,5 +11,4 @@ public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
 
     Optional<Recipe> findByName(String name);
 
-    //Optional<Set<Recipe>> getRecipeBy
 }

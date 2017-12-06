@@ -38,4 +38,6 @@ public class RecipeApiController {
         this.recipeServiceImp.delete(id);
         return  ResponseEntity.ok().build();
     }
+
+
 }

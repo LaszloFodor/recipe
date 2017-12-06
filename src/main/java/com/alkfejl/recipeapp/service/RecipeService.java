@@ -9,7 +9,5 @@ public interface RecipeService {
 
     Recipe addRecipe(Recipe recipe) throws RecipeNotFoundException;
 
-    Recipe getRecipe(int id);
-
     void delete(int id);
 }
