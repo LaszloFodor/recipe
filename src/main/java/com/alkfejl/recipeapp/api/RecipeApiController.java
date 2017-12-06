@@ -1,12 +1,14 @@
 package com.alkfejl.recipeapp.api;
 
 import com.alkfejl.recipeapp.exception.RecipeNotFoundException;
+import com.alkfejl.recipeapp.model.Ingredient;
 import com.alkfejl.recipeapp.model.Recipe;
 import com.alkfejl.recipeapp.service.RecipeServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
 
 
 @RestController
@@ -39,5 +41,10 @@ public class RecipeApiController {
         return  ResponseEntity.ok().build();
     }
 
-
+    /*
+    @GetMapping("/ingredients/")
+    public ResponseEntity<Set<Ingredient>> getIngredients(@RequestBody Recipe recipe) {
+        return ResponseEntity.ok(recipeServiceImp.getIngredients(recipe));
+    }
+    */
 }
