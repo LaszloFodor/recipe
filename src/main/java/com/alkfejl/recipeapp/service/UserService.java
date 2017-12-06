@@ -1,5 +1,7 @@
 package com.alkfejl.recipeapp.service;
 
+import com.alkfejl.recipeapp.exception.UserNotValidException;
+import com.alkfejl.recipeapp.model.Recipe;
 import com.alkfejl.recipeapp.model.User;
 import lombok.Data;
 import org.springframework.stereotype.Service;
@@ -10,9 +12,14 @@ import java.util.Set;
 @Service
 public interface UserService {
 
-    Set<User> getUsers();
+    User login(User user) throws UserNotValidException;
 
-    User getUser(int id);
+    User register(User user);
 
-    User getUserByUserName(String username);
+    boolean isValid(User user);
+
+    boolean isLoggedIn();
+
+    Set<Recipe> getRecipes(User user);
+
 }

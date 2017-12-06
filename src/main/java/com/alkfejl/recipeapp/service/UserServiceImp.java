@@ -1,7 +1,9 @@
 package com.alkfejl.recipeapp.service;
 
 import com.alkfejl.recipeapp.exception.UserNotValidException;
+import com.alkfejl.recipeapp.model.Recipe;
 import com.alkfejl.recipeapp.model.User;
+import com.alkfejl.recipeapp.repository.RecipeRepository;
 import com.alkfejl.recipeapp.repository.UserRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class UserServiceImp implements UserService{
     private UserRepository userRepository;
 
     private User user;
+
+    @Autowired
+    private RecipeRepository recipeRepository;
 
     public User login(User user) throws UserNotValidException {
         if (isValid(user)) {
@@ -44,17 +49,8 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public Set<User> getUsers() {
-        return null;
+    public Set<Recipe> getRecipes(User user) {
+        return user.getRecipeSet();
     }
 
-    @Override
-    public User getUser(int id) {
-        return null;
-    }
-
-    @Override
-    public User getUserByUserName(String username) {
-        return null;
-    }
 }

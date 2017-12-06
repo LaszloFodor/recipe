@@ -1,31 +1,39 @@
 package com.alkfejl.recipeapp.service;
 
+import com.alkfejl.recipeapp.exception.RecipeNotFoundException;
 import com.alkfejl.recipeapp.model.Recipe;
 import com.alkfejl.recipeapp.repository.RecipeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 public class RecipeServiceImp implements RecipeService {
 
+    @Autowired
+    private RecipeRepository recipeRepository;
 
-    private final RecipeRepository recipeRepository;
-
-    public RecipeServiceImp(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
-    }
+    private Recipe recipe;
 
     @Override
-    public Set<Recipe> getRecipes() {
-        Set<Recipe> recipes = new HashSet<>();
-        recipeRepository.findAll().iterator().forEachRemaining(recipes::add);
-        return recipes;
+    public Recipe addRecipe(Recipe recipe) throws RecipeNotFoundException {
+        if (isValid(recipe)) {
+            return this.recipe = recipeRepository.findByName(recipe.getName()).get();
+        }
+        throw new RecipeNotFoundException();
+    }
+
+    private boolean isValid(Recipe recipe) {
+        return recipeRepository.findByName(recipe.getName()).isPresent();
     }
 
     @Override
     public Recipe getRecipe(int id) {
-        return recipeRepository.findOne(id);
+        this.recipe = recipeRepository.findOne(id);
+        return recipe;
+    }
+
+    @Override
+    public void delete(int id) {
+        recipeRepository.delete(id);
     }
 }
