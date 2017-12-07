@@ -1,6 +1,7 @@
 package com.alkfejl.recipeapp.controller;
 
 
+import com.alkfejl.recipeapp.service.IngredientService;
 import com.alkfejl.recipeapp.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class IndexController {
     @RequestMapping({"","/", "/index"})
     public String getIndexPage(Model model) {
 
-        //model.addAttribute("recipe", recipeService.getRecipe());
+        //model.addAttribute("recipe");
         return "index";
     }
 

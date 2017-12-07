@@ -16,6 +16,6 @@ public interface UserService {
 
     boolean isLoggedIn();
 
-    Set<Recipe> getRecipes(User user);
+    //Set<Recipe> getRecipes(User user);
 
 }

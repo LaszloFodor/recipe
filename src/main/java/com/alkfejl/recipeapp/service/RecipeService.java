@@ -12,5 +12,8 @@ public interface RecipeService {
 
     void delete(int id);
 
-    //Set<Ingredient> getIngredients(Recipe recipe);
+    Set<Recipe> getRecipes();
+
+    Recipe findById(int id);
+
 }

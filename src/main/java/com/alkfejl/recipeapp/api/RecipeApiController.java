@@ -22,10 +22,6 @@ public class RecipeApiController {
         this.recipeServiceImp = recipeServiceImp;
     }
 
-    //add
-    //delete
-    //delete all
-
     @PostMapping("/add")
     public ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
         try {
@@ -41,10 +37,9 @@ public class RecipeApiController {
         return  ResponseEntity.ok().build();
     }
 
-    /*
-    @GetMapping("/ingredients/")
-    public ResponseEntity<Set<Ingredient>> getIngredients(@RequestBody Recipe recipe) {
-        return ResponseEntity.ok(recipeServiceImp.getIngredients(recipe));
+
+    @GetMapping("/getall")
+    public ResponseEntity getRecipes() {
+        return ResponseEntity.ok(recipeServiceImp.getRecipes());
     }
-    */
 }

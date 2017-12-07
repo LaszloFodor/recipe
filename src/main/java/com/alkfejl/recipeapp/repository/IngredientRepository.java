@@ -11,6 +11,6 @@ public interface IngredientRepository extends CrudRepository<Ingredient, Integer
 
     Optional<Ingredient> findByName(String name);
 
-    void delete(int id);
+    Optional<Ingredient> findById(int id);
 
 }

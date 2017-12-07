@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/ingredients")
+@RequestMapping("api/ingredient")
 public class IngredientApiController {
 
     private final IngredientServiceImp ingredientServiceImp;
@@ -31,6 +31,11 @@ public class IngredientApiController {
     public ResponseEntity delete(@PathVariable(value = "id") int id) {
         this.ingredientServiceImp.delete(id);
         return  ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity getRecipes() {
+        return ResponseEntity.ok(ingredientServiceImp.getRecipes());
     }
 
 }

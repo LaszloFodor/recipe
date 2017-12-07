@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -38,10 +40,20 @@ public class RecipeServiceImp implements RecipeService {
         recipeRepository.delete(id);
     }
 
-    /*
     @Override
-    public Set<Ingredient> getIngredients(Recipe recipe) {
-        return recipeRepository.getByIngredientSet(recipe).get();
+    public Set<Recipe> getRecipes() {
+        Set<Recipe> recipeSet = new HashSet<>();
+        recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
+        return recipeSet;
     }
-    */
+
+    @Override
+    public Recipe findById(int id) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+
+        if(!recipeOptional.isPresent()){
+            throw new RuntimeException("Recipe not found!");
+        }
+        return recipeOptional.get();
+    }
 }

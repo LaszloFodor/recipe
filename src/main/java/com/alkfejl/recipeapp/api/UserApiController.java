@@ -4,11 +4,15 @@ import com.alkfejl.recipeapp.exception.UserNotValidException;
 import com.alkfejl.recipeapp.model.Recipe;
 import com.alkfejl.recipeapp.model.User;
 import com.alkfejl.recipeapp.service.UserServiceImp;
+import com.alkfejl.recipeapp.service.annotations.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
+
+import static com.alkfejl.recipeapp.model.User.Role.ADMIN;
+import static com.alkfejl.recipeapp.model.User.Role.USER;
 
 
 @RestController
@@ -22,7 +26,7 @@ public class UserApiController {
         this.userServiceImp = userServiceImp;
     }
 
-    //@Role({USER, ADMIN})
+    @Role({USER, ADMIN})
     @GetMapping
     public ResponseEntity<User> user() {
         if (userServiceImp.isLoggedIn()) {
@@ -51,10 +55,10 @@ public class UserApiController {
         return ResponseEntity.ok(userServiceImp.register(user));
     }
 
-    @GetMapping("/recipes")
+    /*@GetMapping("/recipes")
     public ResponseEntity<Set<Recipe>> getRecipes(@RequestBody User user) {
         return ResponseEntity.ok(userServiceImp.getRecipes(user));
-    }
+    }*/
 
 
 
