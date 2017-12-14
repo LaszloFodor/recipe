@@ -1,5 +1,6 @@
 package com.alkfejl.recipeapp.api;
 
+import com.alkfejl.recipeapp.exception.RecipeIsInvalidException;
 import com.alkfejl.recipeapp.exception.RecipeNotFoundException;
 import com.alkfejl.recipeapp.model.Ingredient;
 import com.alkfejl.recipeapp.model.Recipe;
@@ -26,15 +27,19 @@ public class RecipeApiController {
     public ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
         try {
             return ResponseEntity.ok(recipeServiceImp.addRecipe(recipe));
-        } catch (RecipeNotFoundException e) {
+        } catch (RecipeIsInvalidException e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
     @GetMapping("/delete/{id}")
     public ResponseEntity delete(@PathVariable(value = "id") int id) {
-        this.recipeServiceImp.delete(id);
-        return  ResponseEntity.ok().build();
+        try {
+            this.recipeServiceImp.delete(id);
+            return  ResponseEntity.ok().build();
+        } catch (RecipeNotFoundException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 

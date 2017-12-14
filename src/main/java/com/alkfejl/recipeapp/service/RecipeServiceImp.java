@@ -1,5 +1,6 @@
 package com.alkfejl.recipeapp.service;
 
+import com.alkfejl.recipeapp.exception.RecipeIsInvalidException;
 import com.alkfejl.recipeapp.exception.RecipeNotFoundException;
 import com.alkfejl.recipeapp.model.Ingredient;
 import com.alkfejl.recipeapp.model.Recipe;
@@ -24,11 +25,12 @@ public class RecipeServiceImp implements RecipeService {
     private Recipe recipe;
 
     @Override
-    public Recipe addRecipe(Recipe recipe) throws RecipeNotFoundException {
-        if (isValid(recipe)) {
-            return this.recipe = recipeRepository.findByName(recipe.getName()).get();
+    public Recipe addRecipe(Recipe recipe) throws RecipeIsInvalidException {
+        if (isValidRecipe(recipe)) {
+            recipeRepository.save(recipe);
+            return recipeRepository.findByName(recipe.getName()).get();
         }
-        throw new RecipeNotFoundException();
+        throw new RecipeIsInvalidException("The given data is invalid!");
     }
 
     private boolean isValid(Recipe recipe) {
@@ -36,8 +38,11 @@ public class RecipeServiceImp implements RecipeService {
     }
 
     @Override
-    public void delete(int id) {
-        recipeRepository.delete(id);
+    public void delete(int id) throws RecipeNotFoundException{
+        if(isValid(findById(id))) {
+            recipeRepository.delete(id);
+        }
+        throw new RecipeNotFoundException("No recipe is found by given id!");
     }
 
     @Override
@@ -55,5 +60,16 @@ public class RecipeServiceImp implements RecipeService {
             throw new RuntimeException("Recipe not found!");
         }
         return recipeOptional.get();
+    }
+
+    private boolean isValidRecipe(Recipe recipe) {
+        if(recipe != null) {
+            if(recipe.getName() != null && recipe.getIngredientSet() != null) {
+                if(!recipe.getName().equals("") && !recipe.getIngredientSet().isEmpty()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

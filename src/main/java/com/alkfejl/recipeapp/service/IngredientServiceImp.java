@@ -1,5 +1,6 @@
 package com.alkfejl.recipeapp.service;
 
+import com.alkfejl.recipeapp.exception.IngredientIsInvalidException;
 import com.alkfejl.recipeapp.exception.IngredientNotFoundException;
 import com.alkfejl.recipeapp.model.Ingredient;
 import com.alkfejl.recipeapp.repository.IngredientRepository;
@@ -23,16 +24,20 @@ public class IngredientServiceImp implements IngredientService {
     private Ingredient ingredient;
 
     @Override
-    public Ingredient addIngredient(Ingredient ingredient) throws IngredientNotFoundException {
-        if(isValid(ingredient)) {
-            return this.ingredient = ingredientRepository.findByName(ingredient.getName()).get();
+    public Ingredient addIngredient(Ingredient ingredient) throws IngredientIsInvalidException {
+        if(isValidIngredient(ingredient)) {
+            ingredientRepository.save(ingredient);
+            return ingredientRepository.findById(ingredient.getId()).get();
         }
-        throw new IngredientNotFoundException();
+        throw new IngredientIsInvalidException("The given data is invalid!");
     }
 
     @Override
-    public void delete(int id) {
-        ingredientRepository.delete(id);
+    public void delete(int id) throws IngredientNotFoundException {
+        if(isValid(findById(id))) {
+            ingredientRepository.delete(id);
+        }
+        throw new IngredientNotFoundException("No ingredient is found by given id!");
     }
 
     @Override
@@ -54,5 +59,16 @@ public class IngredientServiceImp implements IngredientService {
 
     private boolean isValid(Ingredient ingredient) {
         return ingredientRepository.findByName(ingredient.getName()).isPresent();
+    }
+
+    private boolean isValidIngredient(Ingredient ingredient) {
+        if(ingredient != null) {
+            if(ingredient.getName() != null && ingredient.getUnit() != null) {
+                if(!ingredient.getName().equals("") && !ingredient.getUnit().equals("")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

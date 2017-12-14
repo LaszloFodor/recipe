@@ -53,4 +53,11 @@ public class UserServiceImp implements UserService{
         return user.getRecipeSet();
     }*/
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

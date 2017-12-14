@@ -14,7 +14,7 @@ import java.util.Set;
 import static com.alkfejl.recipeapp.model.User.Role.ADMIN;
 import static com.alkfejl.recipeapp.model.User.Role.USER;
 
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("api/user")
 public class UserApiController {
