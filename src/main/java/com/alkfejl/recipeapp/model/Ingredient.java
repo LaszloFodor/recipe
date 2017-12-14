@@ -4,9 +4,8 @@ package com.alkfejl.recipeapp.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
-@Setter
-@Getter
 @Data
 @Entity
 public class Ingredient {
@@ -17,19 +16,16 @@ public class Ingredient {
 
     private String name;
 
-    private double amount;
-
-    @ManyToOne
-    private Recipe recipe;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "ingredientId")
+    private Set<RecipeIngredient> recipeIngredient;
 
     @Enumerated(value = EnumType.STRING)
     private Unit unit;
 
     public Ingredient() {}
 
-    public Ingredient(String name, double amount, Unit unit) {
+    public Ingredient(int id, String name, Unit unit) {
         this.name = name;
-        this.amount = amount;
         this.unit = unit;
     }
 
@@ -49,20 +45,12 @@ public class Ingredient {
         this.name = name;
     }
 
-    public double getAmount() {
-        return amount;
+    public Set<RecipeIngredient> getRecipeIngredient() {
+        return recipeIngredient;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
+    public void setRecipeIngredient(Set<RecipeIngredient> recipe) {
+        this.recipeIngredient = recipe;
     }
 
     public Unit getUnit() {

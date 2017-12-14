@@ -6,8 +6,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
-@Setter
-@Getter
 @Data
 @Entity
 public class Recipe {
@@ -22,11 +20,21 @@ public class Recipe {
 
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredientSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipeId")
+    private Set<RecipeIngredient> ingredientSet;
 
     @ManyToOne
     private User user;
+
+    public Recipe() {
+
+    }
+
+    public Recipe(int id, String name, String description, Set<RecipeIngredient> ingredientSet) {
+        this.name = name;
+        this.description = description;
+        this.ingredientSet = ingredientSet;
+    }
 
     public int getId() {
         return id;
@@ -60,11 +68,11 @@ public class Recipe {
         this.description = description;
     }
 
-    public Set<Ingredient> getIngredientSet() {
+    public Set<RecipeIngredient> getRecipeIngredientSet() {
         return ingredientSet;
     }
 
-    public void setIngredientSet(Set<Ingredient> ingredientSet) {
+    public void setRecipeIngredientSet(Set<RecipeIngredient> ingredientSet) {
         this.ingredientSet = ingredientSet;
     }
 

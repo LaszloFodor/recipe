@@ -4,6 +4,8 @@ import com.alkfejl.recipeapp.exception.RecipeIsInvalidException;
 import com.alkfejl.recipeapp.exception.RecipeNotFoundException;
 import com.alkfejl.recipeapp.model.Ingredient;
 import com.alkfejl.recipeapp.model.Recipe;
+import com.alkfejl.recipeapp.model.RecipeIngredient;
+import com.alkfejl.recipeapp.repository.RecipeIngredientRepository;
 import com.alkfejl.recipeapp.repository.RecipeRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,19 @@ public class RecipeServiceImp implements RecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
 
+    @Autowired
+    private RecipeIngredientRepository recipeIngredientRepository;
+
     private Recipe recipe;
 
     @Override
     public Recipe addRecipe(Recipe recipe) throws RecipeIsInvalidException {
         if (isValidRecipe(recipe)) {
             recipeRepository.save(recipe);
+            for(RecipeIngredient ingredient : recipe.getRecipeIngredientSet()) {
+                recipeIngredientRepository.save(new RecipeIngredient(recipe.getId(), ingredient.getIngredientId(),
+                    ingredient.getAmount()));
+            }
             return recipeRepository.findByName(recipe.getName()).get();
         }
         throw new RecipeIsInvalidException("The given data is invalid!");
@@ -41,6 +50,7 @@ public class RecipeServiceImp implements RecipeService {
     public void delete(int id) throws RecipeNotFoundException{
         if(isValid(findById(id))) {
             recipeRepository.delete(id);
+            recipeIngredientRepository.deleteByRecipeId(id);
         }
         throw new RecipeNotFoundException("No recipe is found by given id!");
     }
@@ -64,8 +74,8 @@ public class RecipeServiceImp implements RecipeService {
 
     private boolean isValidRecipe(Recipe recipe) {
         if(recipe != null) {
-            if(recipe.getName() != null && recipe.getIngredientSet() != null) {
-                if(!recipe.getName().equals("") && !recipe.getIngredientSet().isEmpty()) {
+            if(recipe.getName() != null && recipe.getDescription() != null && recipe.getRecipeIngredientSet() != null) {
+                if(!recipe.getName().equals("") && !recipe.getDescription().equals("") && !recipe.getRecipeIngredientSet().isEmpty()) {
                     return true;
                 }
             }

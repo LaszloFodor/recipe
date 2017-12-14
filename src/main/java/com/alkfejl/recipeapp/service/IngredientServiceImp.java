@@ -3,7 +3,9 @@ package com.alkfejl.recipeapp.service;
 import com.alkfejl.recipeapp.exception.IngredientIsInvalidException;
 import com.alkfejl.recipeapp.exception.IngredientNotFoundException;
 import com.alkfejl.recipeapp.model.Ingredient;
+import com.alkfejl.recipeapp.model.RecipeIngredient;
 import com.alkfejl.recipeapp.repository.IngredientRepository;
+import com.alkfejl.recipeapp.repository.RecipeIngredientRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class IngredientServiceImp implements IngredientService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
+    @Autowired
+    private RecipeIngredientRepository recipeIngredientRepository;
+
     private Ingredient ingredient;
 
     @Override
@@ -36,6 +41,7 @@ public class IngredientServiceImp implements IngredientService {
     public void delete(int id) throws IngredientNotFoundException {
         if(isValid(findById(id))) {
             ingredientRepository.delete(id);
+            recipeIngredientRepository.deleteByIngredientId(id);
         }
         throw new IngredientNotFoundException("No ingredient is found by given id!");
     }

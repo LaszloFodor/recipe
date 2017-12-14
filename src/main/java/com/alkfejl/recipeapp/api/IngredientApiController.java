@@ -7,6 +7,7 @@ import com.alkfejl.recipeapp.service.IngredientServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("api/ingredient")
@@ -28,7 +29,7 @@ public class IngredientApiController {
         }
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity delete(@PathVariable(value = "id") int id) {
         try {
             this.ingredientServiceImp.delete(id);
