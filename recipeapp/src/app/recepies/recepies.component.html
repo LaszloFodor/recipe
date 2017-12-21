@@ -1,0 +1,65 @@
+<h1>Recepies</h1>
+
+<h3>New recepie</h3>
+
+<div>
+  <label>Name:
+    <input [(ngModel)]="newRecepie.name" placeholder="name">
+  </label>
+  <label>description:
+    <textarea [(ngModel)]="newRecepie.description" type="string" placeholder="description"></textarea>
+  </label>
+
+  <br>
+  <label>Ingredients:
+    <select [(ngModel)]="newIngredient.id">
+      <option *ngFor="let ingredient of filteredIngredients()" [ngValue]="ingredient.id">{{ingredient.name}}</option>
+    </select>
+  </label>
+  <label>Amount:
+    <input [(ngModel)]="newIngredient.amount" placeholder="amount">
+  </label>
+  <button class="btn btn-primary" (click)="addIngredient(newIngredient)">Add Ingredient</button>
+  <h4>ingredients:</h4>
+  <table class="table">
+    <tr><th>Name</th>
+      <th>Amount</th></tr>
+
+    <tr *ngFor="let ingredient of newRecepie.ingredients">
+      <td>{{getIngredientById(ingredient.id).name}}</td>
+       <td>{{ingredient.amount}} {{getIngredientById(ingredient.id).unit}}</td>
+      <td><span (click)="deleteIngredient(ingredient.id)">X</span></td>
+
+    </tr>
+  </table>
+  <hr>
+  <button class="btn btn-primary" (click)="onSave(newRecepie)">Save recepie</button>
+</div>
+
+
+
+<hr>
+
+
+<table class="table">
+  <tr> <th>Name</th>
+    <th>description</th>
+    <th>ingredients</th></tr>
+
+<tr *ngFor="let recepie of recepies">
+  <td><b>{{recepie.name}}</b></td>
+  <td>{{recepie.description}}</td>
+  <td>
+    <table class="table">
+      <tr>  <th>Name</th>
+        <th>Amount</th>
+      </tr>
+      <tr *ngFor="let ingredient of recepie.ingredients">
+        <td>{{getIngredientById(ingredient.id).name}}</td>
+        <td>{{ingredient.amount}} {{getIngredientById(ingredient.id).unit}}</td>
+      </tr>
+    </table>
+  </td>
+  <td> <span (click)="deleteRecepie(recepie.id)">X</span></td>
+</tr>
+</table>

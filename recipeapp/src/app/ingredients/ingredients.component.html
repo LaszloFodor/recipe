@@ -1,0 +1,23 @@
+<h1>ingredients</h1>
+<h3>New ingredient</h3>
+<div>
+  <label>Name:
+    <input [(ngModel)]="newIngredient.name" placeholder="name">
+  </label>
+  <label>Unit:
+    <select [(ngModel)]="newIngredient.unit">
+      <option *ngFor="let unit of units" [ngValue]="unit">{{unit}}</option>
+    </select>
+  </label>
+  <button class="btn btn-primary" (click)="onSave(newIngredient)">Add ingredient</button>
+</div>
+<hr>
+<table class="table">
+  <th>Name</th>
+  <th>Unit</th>
+<tr *ngFor="let ingredient of ingredients">
+  <td><b>{{ingredient.name}}</b></td>
+  <td>{{ingredient .unit}}</td>
+  <td><span (click)="deleteIngredient(ingredient.id)">X</span></td>
+</tr>
+</table>
